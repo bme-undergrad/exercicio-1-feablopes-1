@@ -10,12 +10,6 @@ imax = 20;
 
 % digite seu codigo aqui
 
-function tr = exercicio1(func, x0)
-  % Encontra a raiz de func(t) a partir do chute x0 usando Newton-Raphson.
-  % Retorna um escalar tr. Para o autograder:
-  % - máx. 20 iterações
-  % - critério de parada: erro relativo < 0.01 (1%)
-
   maxit = 20;
   tol   = 0.01;
 
