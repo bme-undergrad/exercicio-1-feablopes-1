@@ -29,9 +29,7 @@ endfor
   erro = erro(ii)
 
   resultado_interacoes = ii
-
 t = 1
-
 endfunction
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
