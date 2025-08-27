@@ -1,33 +1,36 @@
-function t = exercicio1(func,func_d,x0)
+function tr = exercicio1(func, x0)
+  % Secante modificada para raiz de func(t)
+  % Entrada: handle, x0 (chute inicial)
+  % Saída:   escalar
+  % Critérios: máx. 20 iterações; erro relativo < 1%
 
-% nao alterar: inicio
-es = 0.01;
-imax = 20;
-% nao alterar: fim
+  imax = 20;
+  es   = 0.01;                  % 1%
+  t = x0;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
+  for k = 1:imax
+    f  = func(t);
+    d  = 1e-6 * max(1, abs(t)); % passo pequeno para secante modificada
+    fd = func(t + d);
 
+    denom = fd - f;
+    if denom == 0 || ~isfinite(denom)
+      tr = NaN;                 % não foi possível atualizar
+      return
+    end
 
-t = zeros(20, 1);
-t(1) = 0.1;
-erro = zeros(length(t), 1);
+    t_new = t - f * (d / denom);
 
-for ii = 1:length(t)-1
-  if ii ~= 1
-    erro(ii) = abs(t(ii) - t(ii-1))/t(ii);
-    if erro(ii) < 0.01
-      break
-    endif
-  endif
-  t(ii+1) = t(ii) - func(t(ii))/func_d(t(ii));
-endfor
-  last_index = find(t, 1, 'last');
-  resultado = t(last_index)
+    if k > 1
+      ea = abs((t_new - t) / max(1, abs(t_new)));
+      if ea < es
+        tr = t_new;
+        return
+      end
+    end
 
-  erro = erro(ii)
+    t = t_new;
+  end
 
-  resultado_interacoes = ii
-t = 1
-endfunction
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  tr = t;                       % último valor se não atingiu tol antes
+end
