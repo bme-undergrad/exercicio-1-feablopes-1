@@ -9,9 +9,7 @@ imax = 20;
 
 
 t = zeros(20, 1);
-
 t(1) = 0.1;
-
 erro = zeros(length(t), 1);
 
 for ii = 1:length(t)-1
